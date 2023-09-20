@@ -14,15 +14,17 @@ import Details from './Details';
 const router = createBrowserRouter([
   {
     path:'/',
+    loader:()=>fetch('https://www.themealdb.com/api/json/v1/1/random.php'),
     element:<Home></Home>,
     children:[
       {
-        path:'/about',
+        path:'/foods',
         loader:()=>fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=a'),
         element:<About></About>
       },
       {
-        path:'/details',
+        path:'/foods/:idMeal',
+        loader:({params})=> fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.idMeal}`),
         element: <Details></Details>
       }
     ]
